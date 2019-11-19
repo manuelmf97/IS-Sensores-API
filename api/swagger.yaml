@@ -1,0 +1,222 @@
+openapi: 3.0.1
+info:
+  title: GeoCardioBand Sensores
+  description: API encargada de la gestion de los sensores del proyecto GeoCardioBand.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mamenorf@alumnos.unex.es
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://www.geocardioband.com/api/v1/sensores
+- url: http://virtserver.swaggerhub.com/manuelmenor/GeoCardioBand_Sensores/1.0.0
+tags:
+- name: sensores
+  description: Todo sobre sensores
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
+paths:
+  /sensores/{sensoresId}:
+    get:
+      tags:
+      - sensores
+      summary: Encontrar parametros de un sensor identificado por ID
+      description: Devuelve parametros de un unico sensor
+      operationId: getParametersSensor
+      parameters:
+      - name: sensoresId
+        in: path
+        description: Id del sensor del que obtener informacion
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Operacion valida
+        400:
+          description: ID proporcionado no valido
+          content: {}
+        404:
+          description: Sensor no encontrado
+          content: {}
+        405:
+          description: No se pudo validar
+          content: {}
+        500:
+          description: Error Interno
+          content: {}
+      x-codegen-request-body-name: body
+      x-swagger-router-controller: Sensores
+  /sensores/{sensoresId}/findByTimeStamp:
+    get:
+      tags:
+      - sensores
+      summary: Encontrar parametros de un sensor identificado por ID
+      description: Devuelve parametros cardiacos de un unico sensor
+      operationId: getParametersSensorbyTimeStamp
+      parameters:
+      - name: sensoresId
+        in: path
+        description: Id del sensor del que obtener informacion
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64di
+      - name: timeStamp
+        in: query
+        description: timeStamp del momento del que se quiere obtener informacion
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Operacion valida
+        400:
+          description: ID proporcionado no valido
+          content: {}
+        404:
+          description: Sensor no encontrado
+          content: {}
+        405:
+          description: Validation exception
+          content: {}
+        500:
+          description: Error Interno
+          content: {}
+      x-codegen-request-body-name: body
+      x-swagger-router-controller: Sensores
+  /sensores/{sensoresId}/conexion:
+    get:
+      tags:
+      - sensores
+      summary: Conocer conexion de un sensor identificado por ID
+      description: Devuelve estado de la conexion del sensor
+      operationId: getConexion
+      parameters:
+      - name: sensoresId
+        in: path
+        description: Id del sensor del que obtener informacion
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64di
+      responses:
+        200:
+          description: Operacion valida
+        400:
+          description: ID proporcionado no valido
+          content: {}
+        404:
+          description: Sensor no encontrado
+          content: {}
+        405:
+          description: Validation exception
+          content: {}
+        500:
+          description: Error Interno
+          content: {}
+      x-codegen-request-body-name: body
+      x-swagger-router-controller: Sensores
+  /sensores/{sensoresId}/Ubicacion:
+    get:
+      tags:
+      - sensores
+      summary: Encontrar ubicacion del dispositivo
+      description: Devuelve la posicion del sensor GPS
+      operationId: getUbicacion
+      parameters:
+      - name: sensoresId
+        in: path
+        description: Id del sensor del que obtener informacion
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64di
+      responses:
+        200:
+          description: Operacion valida
+          content:
+            aplication/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ubicacion'
+                x-content-type: aplication/xml
+        400:
+          description: ID proporcionado no valido
+          content: {}
+        404:
+          description: Sensor no encontrado
+          content: {}
+        405:
+          description: Validation exception
+          content: {}
+        500:
+          description: Error Interno
+          content: {}
+      x-codegen-request-body-name: body
+      x-swagger-router-controller: Sensores
+components:
+  schemas:
+    Sensor:
+      type: object
+      properties:
+        sensorId:
+          type: integer
+          format: int64
+    Ubicacion:
+      type: object
+      properties:
+        latitud:
+          type: number
+          format: float64
+        longitud:
+          type: number
+          format: float64
+      example:
+        latitud: 0.80082819046101150206595775671303272247314453125
+        longitud: 6.02745618307040320615897144307382404804229736328125
+      xml:
+        name: Ubicacion
+    Contacto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        numero:
+          type: string
+        ubicacion:
+          type: object
+          format: Ubicacion
+      xml:
+        name: Contacto
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
