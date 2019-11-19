@@ -10,7 +10,19 @@
  **/
 exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    var examples = {};
+    var conexion;
+    var random = Math.random();
+    random =  Math.round(var);
+    if(random == 0){
+      conexion = false;
+    }else{
+      conexion = true;
+    }
+    examples['application/json'] = [ {
+      "conexion" : conexion
+      } ];
+    resolve(examples[Object.keys(examples)[0]]);
   });
 }
 
@@ -55,13 +67,10 @@ exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "latitud" : 0.2222,
-  "longitud" : 0.4444
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+      "latitud" : 0.2222,
+      "longitud" : 0.4444
+      } ];
+    resolve(examples[Object.keys(examples)[0]]);
+
   });
 }
