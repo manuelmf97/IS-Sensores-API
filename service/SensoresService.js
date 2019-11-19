@@ -36,7 +36,22 @@ exports.getConexion = function(sensoresId) {
  **/
 exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    var examples = {};
+    var parameter;
+    var random = Math.random();
+    random =  Math.round(random);
+    if(random == 0){
+      parameter = Math.round(Math.random() * (180 -50) + 50);
+    }else{
+      parameter = Math.round(Math.random() * (99 -95) + 95);
+    }
+    examples['application/json'] = [ {
+      "Bpm" : parameter
+    },
+    {
+      "Oxygen(%)" : parameter
+    } ];
+    resolve(examples[Object.keys(examples)[random]]);
   });
 }
 
