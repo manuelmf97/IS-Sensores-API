@@ -68,6 +68,23 @@ exports.getParametersSensor = function(sensoresId) {
  **/
 exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
   return new Promise(function(resolve, reject) {
+    var examples = {};
+    var parameter;
+    if(sensoresId == 0){
+      parameter = Math.round(Math.random() * (180 -50) + 50);
+      examples['application/json'] = [ {
+        "Bpm" : parameter
+      } ];
+      resolve(examples[Object.keys(examples)[0]]);
+    }else{
+      if(sensoresId == 1){
+        parameter = Math.round(Math.random() * (99 -95) + 95);
+        examples['application/json'] = [ {
+          "Oxygen(%)" : parameter
+        } ];
+        resolve(examples[Object.keys(examples)[0]]);
+      }
+    }
     resolve();
   });
 }
@@ -84,8 +101,8 @@ exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-      "latitud" : 0.2222,
-      "longitud" : 0.4444
+      "latitud" : 0.8008281904610115,
+      "longitud" : 6.027456183070403
       } ];
     resolve(examples[Object.keys(examples)[0]]);
 
