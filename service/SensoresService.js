@@ -19,9 +19,9 @@ exports.getConexion = function(sensoresId) {
     }else{
       conexion = true;
     }
-    examples['application/json'] = [ {
+    examples['application/json'] ={
       "conexion" : conexion
-      } ];
+      };
     resolve(examples[Object.keys(examples)[0]]);
   });
 }
@@ -39,17 +39,17 @@ exports.getParametersSensor = function(sensoresId) {
     var examples = {};
     var parameter;
     if(sensoresId == 0){
-      parameter = Math.round(Math.random() * (180 -50) + 50);
-      examples['application/json'] = [ {
+      parameter = Math.round(Math.random() * (180 - 50) + 50);
+      examples['application/json'] = {
         "Bpm" : parameter
-      } ];
+      };
       resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
-        parameter = Math.round(Math.random() * (99 -95) + 95);
-        examples['application/json'] = [ {
+        parameter = Math.round(Math.random() * (99 - 95) + 95);
+        examples['application/json'] = {
           "Oxygen(%)" : parameter
-        } ];
+        };
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
@@ -72,16 +72,16 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
     var parameter;
     if(sensoresId == 0){
       parameter = Math.round(Math.random() * (180 -50) + 50);
-      examples['application/json'] = [ {
+      examples['application/json'] = {
         "Bpm" : parameter
-      } ];
+      };
       resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
         parameter = Math.round(Math.random() * (99 -95) + 95);
-        examples['application/json'] = [ {
+        examples['application/json'] = {
           "Oxygen(%)" : parameter
-        } ];
+        };
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
@@ -100,10 +100,10 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
 exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = [ {
+    examples['application/json'] = {
       "latitud" : 0.8008281904610115,
       "longitud" : 6.027456183070403
-      } ];
+      };
     resolve(examples[Object.keys(examples)[0]]);
 
   });
