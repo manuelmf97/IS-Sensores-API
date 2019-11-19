@@ -42,21 +42,18 @@ exports.getParametersSensor = function(sensoresId) {
       parameter = Math.round(Math.random() * (180 -50) + 50);
       examples['application/json'] = [ {
         "Bpm" : parameter
-      }];
+      } ];
+      resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
         parameter = Math.round(Math.random() * (99 -95) + 95);
         examples['application/json'] = [ {
           "Oxygen(%)" : parameter
         } ];
+        resolve(examples[Object.keys(examples)[0]]);
       }
     }
-    if(paremeter != null){
-      resolve(examples[Object.keys(examples)[0]]);
-    }else{
-      resolve();
-    }
-
+    resolve();
   });
 }
 
