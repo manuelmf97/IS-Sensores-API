@@ -38,20 +38,25 @@ exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     var parameter;
-    var random = Math.random();
-    random =  Math.round(random);
-    if(random == 0){
+    if(sensoresId == 0){
       parameter = Math.round(Math.random() * (180 -50) + 50);
+      examples['application/json'] = [ {
+        "Bpm" : parameter
+      }];
     }else{
-      parameter = Math.round(Math.random() * (99 -95) + 95);
+      if(sensoresId == 1){
+        parameter = Math.round(Math.random() * (99 -95) + 95);
+        examples['application/json'] = [ {
+          "Oxygen(%)" : parameter
+        } ];
+      }
     }
-    examples['application/json'] = [ {
-      "Bpm" : parameter
-    },
-    {
-      "Oxygen(%)" : parameter
-    } ];
-    resolve(examples[Object.keys(examples)[random]]);
+    if(paremeter != null){
+      resolve(examples[Object.keys(examples)[0]]);
+    }else{
+      resolve();
+    }
+
   });
 }
 
