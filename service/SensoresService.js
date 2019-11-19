@@ -13,7 +13,7 @@ exports.getConexion = function(sensoresId) {
     var examples = {};
     var conexion;
     var random = Math.random();
-    random =  Math.round(var);
+    random =  Math.round(random);
     if(random == 0){
       conexion = false;
     }else{
