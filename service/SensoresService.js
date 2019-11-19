@@ -55,8 +55,8 @@ exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "latitud" : 0.8008281904610115,
-  "longitud" : 6.027456183070403
+  "latitud" : 0,
+  "longitud" : 0
 } ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
