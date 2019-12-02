@@ -15,7 +15,7 @@ exports.getConexion = function(sensoresId) {
     var apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
 
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".request.time 1444\n");
+    socket.write(apikey + ".request.cpu 4\n");
     socket.end();
     });
   
