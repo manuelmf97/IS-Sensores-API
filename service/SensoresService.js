@@ -11,13 +11,14 @@
 exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     /** Sending Metrics **/
-    var net = require("net");
+    var net    = require('net');
+    var apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
 
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write("1d7466f3-9a6b-49a4-91ed-beea68bf9126.foo 1.2\n");
+    socket.write(apikey + ".request.time 1444\n');
     socket.end();
-});
-    
+    });
+  
     var examples = {};
     var conexion;
     var random = Math.random();
