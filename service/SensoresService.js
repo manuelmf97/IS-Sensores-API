@@ -73,6 +73,9 @@ exports.getParametersSensor = function(sensoresId) {
       
       if(sensoresId == 0){
         parameter = Math.round(Math.random() * (180 - 50) + 50);
+        if(parameter <= 90 || parameter >= 100){
+          socket.write(apikey + ".sensores.hola.anomalo1 1\n");
+        }
         examples['application/json'] = {
           "Bpm" : parameter
         };
@@ -83,6 +86,9 @@ exports.getParametersSensor = function(sensoresId) {
       }else{
         if(sensoresId == 1){
           parameter = Math.round(Math.random() * (99 - 95) + 95);
+          if(parameter <= 97 || parameter >= 98){
+            socket.write(apikey + ".sensores.hola.anomalo2 1\n");
+          }
           examples['application/json'] = {
             "Oxygen(%)" : parameter
           };
