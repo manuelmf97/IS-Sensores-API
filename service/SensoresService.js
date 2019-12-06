@@ -61,6 +61,15 @@ exports.getParametersSensor = function(sensoresId) {
     var examples = {};
     var parameter;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+      var error = Math.round( Math.random() * (10 - 1) + 1 );
+      if(error == 1 || error <= 5){//20% serán errores 500
+        socket.write(apikey + ".sensores.parameter.error1 1\n");
+      }else{
+        error = Math.random() * (10 - 1) + 1;
+        if(error <= 9){//15% serán errores 404
+          socket.write(apikey + ".sensores.parameter.error2 1\n");
+        }
+      }
       if(sensoresId == 0){
         parameter = Math.round(Math.random() * (180 - 50) + 50);
         examples['application/json'] = {
@@ -68,7 +77,7 @@ exports.getParametersSensor = function(sensoresId) {
         };
         time2 = Date.now();//Tiempo final end point
         totalTime = time2 - time1;
-        socket.write(apikey + ".sensores.parameter1 "+ String(totalTime) +"\n");
+        socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
         resolve(examples[Object.keys(examples)[0]]);
       }else{
         if(sensoresId == 1){
@@ -78,13 +87,13 @@ exports.getParametersSensor = function(sensoresId) {
           };
           time2 = Date.now();//Tiempo final end point
           totalTime = time2 - time1;
-          socket.write(apikey + ".sensores.parameter2 "+ String(totalTime) +"\n");
+          socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
           resolve(examples[Object.keys(examples)[0]]);
         }
       }
       time2 = Date.now();//Tiempo final end point
       totalTime = time2 - time1;
-      socket.write(apikey + ".sensores.parameter3 "+ String(totalTime) +"\n");
+      socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
       socket.end();
       resolve();
     });
