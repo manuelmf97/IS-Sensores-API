@@ -56,7 +56,8 @@ exports.getConexion = function(sensoresId) {
 exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();//Tiempo inicio end point
-    var time2,totalTime;
+    var time2;
+    var totalTime;
     var examples = {};
     var parameter;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
@@ -86,6 +87,7 @@ exports.getParametersSensor = function(sensoresId) {
       time2 = Date.now();//Tiempo final end point
       totalTime = time2 - time1;
       socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+      socket.end();
       resolve();
     });
   });
@@ -142,12 +144,12 @@ exports.getUbicacion = function(sensoresId) {
 
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
       var error = Math.round( Math.random() * (10 - 1) + 1 );
-      if(error == 1 || error == 2){//20% serán errores 500
-        socket.write(apikey + ".sensores.conexion.error1 1\n");
+      if(error == 1 || error <= 5){//20% serán errores 500
+        socket.write(apikey + ".sensores.ubicacion.error1 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 1.5){//15% serán errores 404
-          socket.write(apikey + ".sensores.conexion.error2 1\n");
+        if(error <= 9){//15% serán errores 404
+          socket.write(apikey + ".sensores.ubicacion.error2 1\n");
         }
       }
       var time2 = Date.now();//Tiempo final end point
