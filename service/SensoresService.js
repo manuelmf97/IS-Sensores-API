@@ -38,6 +38,12 @@ exports.getConexion = function(sensoresId) {
 exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();
+    var time2 = Date.now();
+    var totalTime = time2 - time1;
+    var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+    socket.write(apikey + ".sensores.parameter"+ String(totalTime)+"\n");
+    socket.end();
+    });
     var examples = {};
     var parameter;
     if(sensoresId == 0){
@@ -45,12 +51,6 @@ exports.getParametersSensor = function(sensoresId) {
       examples['application/json'] = {
         "Bpm" : parameter
       };
-      var time2 = Date.now();
-      var totalTime = time2 - time1;
-      var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-        socket.write(apikey + ".sensores.parameter"+ String(totalTime)+"\n");
-        socket.end();
-      });
       resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
