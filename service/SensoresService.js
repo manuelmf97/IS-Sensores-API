@@ -62,11 +62,11 @@ exports.getParametersSensor = function(sensoresId) {
     var parameter;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
       var error = Math.round( Math.random() * (10 - 1) + 1 );
-      if(error == 1 || error <= 5){//20% serán errores 500
+      if(error == 1 || error == 2){//20% serán errores 500
         socket.write(apikey + ".sensores.hola.error1 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 1.5){//15% serán errores 404
+        if(error <= 9){//15% serán errores 404
           socket.write(apikey + ".sensores.hola.error2 1\n");
         }
       }
