@@ -116,7 +116,7 @@ exports.getUbicacion = function(sensoresId) {
     var time2 = 18;
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".sensores.ub"+ String(totalTime) +"\n");
+    socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
     socket.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
