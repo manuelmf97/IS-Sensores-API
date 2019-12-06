@@ -11,6 +11,22 @@ const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
  **/
 exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
+    var error = Math.round( Math.random() * (10 - 1) + 1) );
+    if(error == 1 || error == 2){
+        var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+          socket.write(apikey + ".sensores.conexion.error1 1\n");
+          socket.end();
+        });
+    }else{
+     error = 
+       Math.random() * (10 - 1) + 1;
+     if(error <= 1.5){
+          var socket1 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+            socket.write(apikey + ".sensores.conexion.error2 1\n");
+            socket.end();
+        });
+     }
+    }
     var examples = {};
     var conexion;
     var random = Math.random();
