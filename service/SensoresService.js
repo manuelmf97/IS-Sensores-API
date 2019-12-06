@@ -68,7 +68,7 @@ exports.getParametersSensor = function(sensoresId) {
         };
         time2 = Date.now();//Tiempo final end point
         totalTime = time2 - time1;
-        socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+        socket.write(apikey + ".sensores.parameter1 "+ String(totalTime) +"\n");
         resolve(examples[Object.keys(examples)[0]]);
       }else{
         if(sensoresId == 1){
@@ -78,13 +78,13 @@ exports.getParametersSensor = function(sensoresId) {
           };
           time2 = Date.now();//Tiempo final end point
           totalTime = time2 - time1;
-          socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+          socket.write(apikey + ".sensores.parameter2 "+ String(totalTime) +"\n");
           resolve(examples[Object.keys(examples)[0]]);
         }
       }
       time2 = Date.now();//Tiempo final end point
       totalTime = time2 - time1;
-      socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+      socket.write(apikey + ".sensores.parameter3 "+ String(totalTime) +"\n");
       socket.end();
       resolve();
     });
