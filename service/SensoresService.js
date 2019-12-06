@@ -58,21 +58,9 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Oxygen(%)" : parameter
         };
-        var time2 = Date.now();
-        var totalTime = time2 - time1;
-        var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-        socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
-        socket.end();
-        });
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
-    var time2 = Date.now();
-    var totalTime = time2 - time1;
-    var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
-    socket.end();
-    });
     resolve();
   });
 }
@@ -95,6 +83,12 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
       examples['application/json'] = {
         "Bpm" : parameter
       };
+      var time2 = Date.now();
+      var totalTime = time2 - time1;
+      var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+        socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
+        socket.end();
+      });
       resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
@@ -108,7 +102,7 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
     resolve();
   });
 }
-
+  
 
 /**
  * Encontrar ubicacion del dispositivo
@@ -128,8 +122,8 @@ exports.getUbicacion = function(sensoresId) {
     var time2 = Date.now();
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
-    socket.end();
+      socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
+      socket.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
   });
