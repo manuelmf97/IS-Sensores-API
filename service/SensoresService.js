@@ -21,7 +21,7 @@ exports.getConexion = function(sensoresId) {
         });
     }else{
      error = Math.random() * (10 - 1) + 1;
-     if(error <= 9){ //15% seran errores 404
+     if(error <= 1.5){ //15% seran errores 404
           var socket1 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
             socket1.write(apikey + ".sensores.conexion.error2 1\n");
             socket1.end();
@@ -66,10 +66,10 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Bpm" : parameter
         };
-        time2 = Date.now();//Tiempo final end point
-        totalTime = time2 - time1;
-        socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
-        socket.end();
+        //time2 = Date.now();//Tiempo final end point
+        //totalTime = time2 - time1;
+        //socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+        //socket.end();
         resolve(examples[Object.keys(examples)[0]]);
       }else{
         if(sensoresId == 1){
@@ -77,10 +77,10 @@ exports.getParametersSensor = function(sensoresId) {
           examples['application/json'] = {
             "Oxygen(%)" : parameter
           };
-          time2 = Date.now();//Tiempo final end point
-          totalTime = time2 - time1;
-          socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
-          socket.end();
+          //time2 = Date.now();//Tiempo final end point
+          //totalTime = time2 - time1;
+          //socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+          //socket.end();
           resolve(examples[Object.keys(examples)[0]]);
         }
       }
@@ -148,7 +148,7 @@ exports.getUbicacion = function(sensoresId) {
         socket.write(apikey + ".sensores.ubicacion.error1 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 9){//15% serán errores 404
+        if(error <= 1.5){//15% serán errores 404
           socket.write(apikey + ".sensores.ubicacion.error2 1\n");
         }
       }
