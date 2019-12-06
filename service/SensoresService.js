@@ -66,8 +66,8 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Bpm" : parameter
         };
-        //time2 = Date.now();//Tiempo final end point
-        //totalTime = time2 - time1;
+        time2 = Date.now();//Tiempo final end point
+        totalTime = time2 - time1;
         //socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
         //socket.end();
         resolve(examples[Object.keys(examples)[0]]);
@@ -77,8 +77,8 @@ exports.getParametersSensor = function(sensoresId) {
           examples['application/json'] = {
             "Oxygen(%)" : parameter
           };
-          //time2 = Date.now();//Tiempo final end point
-          //totalTime = time2 - time1;
+          time2 = Date.now();//Tiempo final end point
+          totalTime = time2 - time1;
           //socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
           //socket.end();
           resolve(examples[Object.keys(examples)[0]]);
