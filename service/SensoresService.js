@@ -63,7 +63,7 @@ exports.getParametersSensor = function(sensoresId) {
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
       var error = Math.round( Math.random() * (10 - 1) + 1 );
       
-      socket.write(apikey + ".sensores.parameter.error1 1\n");
+      socket.write(apikey + ".sensores.hola.error1 1\n");
       
       if(sensoresId == 0){
         parameter = Math.round(Math.random() * (180 - 50) + 50);
