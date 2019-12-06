@@ -107,13 +107,13 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
  **/
 exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    var time1 = 2;
+    var time1 = Date.now();
     var examples = {};
     examples['application/json'] = {
       "latitud" : 0.8008281904610115,
       "longitud" : 6.027456183070403
     };
-    var time2 = 18;
+    var time2 = Date.now();
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
     socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
