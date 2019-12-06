@@ -12,6 +12,7 @@ const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
 exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     /** Metrics **/
+    
     var error = Math.round( Math.random() * (10 - 1) + 1 );
     if(error == 1 || error == 2){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
