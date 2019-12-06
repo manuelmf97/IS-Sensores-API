@@ -1,6 +1,5 @@
 'use strict';
-const net    = require('net');
-const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
+
 
 /**
  * Conocer conexion de un sensor identificado por ID
@@ -100,6 +99,8 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
  **/
 exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
+    const net    = require('net');
+    const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
     var time1 = Date.now();
     var examples = {};
     examples['application/json'] = {
@@ -109,7 +110,7 @@ exports.getUbicacion = function(sensoresId) {
     var time2 = Date.now();
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".sensores.Ubicacion "+ String(totalTime) +"\n");
+    socket.write(apikey + ".sensores.Ubicacion 1\n");
     socket.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
