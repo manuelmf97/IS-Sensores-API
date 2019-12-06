@@ -37,7 +37,7 @@ exports.getConexion = function(sensoresId) {
  **/
 exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    var time1 = Date.now(),time2,totalTime,socket;
+    var time1 = Date.now();
     var examples = {};
     var parameter;
     if(sensoresId == 0){
@@ -45,11 +45,11 @@ exports.getParametersSensor = function(sensoresId) {
       examples['application/json'] = {
         "Bpm" : parameter
       };
-      time2 = Date.now();
-      totalTime = time2 - time1;
-      socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-        socket.write(apikey + ".sensores.parameter "+ String(totalTime)+"\n");
-        socket.end();
+      var time2 = Date.now();
+      var totalTime = time2 - time1;
+      var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+      socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+      socket.end();
       });
       resolve(examples[Object.keys(examples)[0]]);
     }else{
@@ -58,20 +58,20 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Oxygen(%)" : parameter
         };
-        time2 = Date.now();
-        totalTime = time2 - time1;
-        socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-          socket.write(apikey + ".sensores.parameter "+ String(totalTime)+"\n");
-          socket.end();
+        var time2 = Date.now();
+        var totalTime = time2 - time1;
+        var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+        socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
+        socket.end();
         });
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
-    time2 = Date.now();
-    totalTime = time2 - time1;
-    socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-      socket.write(apikey + ".sensores.parameter "+ String(totalTime)+"\n");
-      socket.end();
+    var time2 = Date.now();
+    var totalTime = time2 - time1;
+    var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+    socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
+    socket.end();
     });
     resolve();
   });
@@ -129,7 +129,6 @@ exports.getUbicacion = function(sensoresId) {
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
     socket.write(apikey + ".sensores.ubicacion "+ String(totalTime) +"\n");
-      
     socket.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
