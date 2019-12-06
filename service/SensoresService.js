@@ -99,14 +99,14 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
  **/
 exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    const net    = require('net');
-    const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
+    var net    = require('net');
+    var apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
     var time1 = Date.now();
     var examples = {};
     examples['application/json'] = {
       "latitud" : 0.8008281904610115,
       "longitud" : 6.027456183070403
-      };
+    };
     var time2 = Date.now();
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
