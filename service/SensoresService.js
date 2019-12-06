@@ -1,5 +1,6 @@
 'use strict';
-
+const net    = require('net');
+const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
 
 /**
  * Conocer conexion de un sensor identificado por ID
@@ -36,6 +37,8 @@ exports.getConexion = function(sensoresId) {
  **/
 exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
+    var time1 = Date.now();
+    var time2,totalTime,socket;
     var examples = {};
     var parameter;
     if(sensoresId == 0){
@@ -43,6 +46,12 @@ exports.getParametersSensor = function(sensoresId) {
       examples['application/json'] = {
         "Bpm" : parameter
       };
+      time2 = Date.now();
+      totalTime = time2 - time1;
+      socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+        socket.write(apikey + ".sensores.parameter"+ String(totalTime)+"\n");
+        socket.end();
+      });
       resolve(examples[Object.keys(examples)[0]]);
     }else{
       if(sensoresId == 1){
@@ -50,9 +59,21 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Oxygen(%)" : parameter
         };
+        time2 = Date.now();
+        totalTime = time2 - time1;
+        socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+           socket.write(apikey + ".sensores.parameter"+ String(totalTime)+"\n");
+           socket.end();
+        });
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
+    time2 = Date.now();
+    totalTime = time2 - time1;
+    socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+      socket.write(apikey + ".sensores.parameter"+ String(totalTime)+"\n");
+      socket.end();
+    });
     resolve();
   });
 }
@@ -99,8 +120,6 @@ exports.getParametersSensorbyTimeStamp = function(sensoresId,timeStamp) {
  **/
 exports.getUbicacion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    var net    = require('net');
-    var apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
     var time1 = Date.now();
     var examples = {};
     examples['application/json'] = {
@@ -110,7 +129,7 @@ exports.getUbicacion = function(sensoresId) {
     var time2 = Date.now();
     var totalTime = time2 - time1;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-    socket.write(apikey + ".sensores.Ubicacion 1\n");
+    socket.write(apikey + ".sensores.Ubicacion"+ String(totalTime)+"\n");
     socket.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
