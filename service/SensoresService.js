@@ -39,7 +39,6 @@ exports.getParametersSensor = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();
     var time2;
-    var socket;
     var totalTime;
     var examples = {};
     var parameter;
@@ -50,9 +49,9 @@ exports.getParametersSensor = function(sensoresId) {
       };
       time2 = Date.now();
       totalTime = time2 - time1;
-      socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-      socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
-      socket.end();
+      var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+        socket.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+        socket.end();
       });
       resolve(examples[Object.keys(examples)[0]]);
     }else{
@@ -61,9 +60,21 @@ exports.getParametersSensor = function(sensoresId) {
         examples['application/json'] = {
           "Oxygen(%)" : parameter
         };
+        time2 = Date.now();
+        totalTime = time2 - time1;
+        var socket1 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+          socket1.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+          socket1.end();
+        });
         resolve(examples[Object.keys(examples)[0]]);
       }
     }
+    time2 = Date.now();
+    totalTime = time2 - time1;
+    var socket2 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+        socket2.write(apikey + ".sensores.parameter "+ String(totalTime) +"\n");
+        socket2.end();
+    });
     resolve();
   });
 }
