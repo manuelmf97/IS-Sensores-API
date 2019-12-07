@@ -15,7 +15,7 @@ exports.getConexion = function(sensoresId) {
     var error = Math.random() * (10 - 1) + 1;
     if(true){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-          socket.write(apikey + ".sensores.conexion.error500 1\n");
+          socket.write(apikey + ".sensores.conexion.prueba1 1\n");
           socket.end();
         });
     }else{
