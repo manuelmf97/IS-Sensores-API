@@ -13,14 +13,14 @@ exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();//Tiempo inicio end point
     var error = Math.round( Math.random() * (10 - 1) + 1 );
-    if(error == 1 || error == 2){//20% seran errores500
+    if(error == 1 || error <= 5){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
           socket.write(apikey + ".sensores.conexion.error500 1\n");
           socket.end();
         });
     }else{
      error = Math.random() * (10 - 1) + 1;
-     if(error <= 1.5){ //Si no es error 500, el 15% seran errores 404
+     if(error <= 9){ //Si no es error 500, el 15% seran errores 404
           var socket1 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
             socket1.write(apikey + ".sensores.conexion.error404 1\n");
             socket1.end();
@@ -68,18 +68,18 @@ exports.getParametersSensor = function(sensoresId) {
     var parameter;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
       var error = Math.round( Math.random() * (10 - 1) + 1 );
-      if(error == 1 || error == 2){//20% serán errores 500
+      if(error == 1 || error <= 5){//20% serán errores 500
         socket.write(apikey + ".sensores.parameter.error500 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 1.5){//Si no es error 500, el 15% serán errores 404
+        if(error <= 9){//Si no es error 500, el 15% serán errores 404
           socket.write(apikey + ".sensores.parameter.error404 1\n");
         }
       }
       
       if(sensoresId == 0){
         parameter = Math.round(Math.random() * (180 - 50) + 50);
-        if(parameter <= 60 || parameter >= 170){
+        if(parameter <= 90 || parameter >= 100){
           socket.write(apikey + ".sensores.parameter.anomalo.cardiaco 1\n");
         }
         examples['application/json'] = {
@@ -92,7 +92,7 @@ exports.getParametersSensor = function(sensoresId) {
       }else{
         if(sensoresId == 1){
           parameter = Math.round(Math.random() * (99 - 95) + 95);
-          if(parameter <= 96 || parameter >= 98){
+          if(parameter <= 97 || parameter >= 98){
             socket.write(apikey + ".sensores.parameter.anomalo.oxigeno 1\n");
           }
           examples['application/json'] = {
@@ -168,7 +168,7 @@ exports.getUbicacion = function(sensoresId) {
         socket.write(apikey + ".sensores.ubicacion.error500 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 1.5){//Si no es error 500,el 15% serán errores 404
+        if(error <= 9){//Si no es error 500,el 15% serán errores 404
           socket.write(apikey + ".sensores.ubicacion.error404 1\n");
         }
       }
