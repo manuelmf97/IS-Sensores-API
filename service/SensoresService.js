@@ -11,8 +11,7 @@ const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
  **/
 exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
-    /** Metrics **/
-    
+    var time1 = Date.now();//Tiempo inicio end point
     var error = Math.round( Math.random() * (10 - 1) + 1 );
     if(error == 1 || error == 2){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
@@ -28,7 +27,7 @@ exports.getConexion = function(sensoresId) {
         });
      }
     }
-    /** End Metrics **/
+    
     var examples = {};
     var conexion;
     var random = Math.random();
@@ -41,7 +40,14 @@ exports.getConexion = function(sensoresId) {
     examples['application/json'] ={
       "conexion" : conexion
       };
+    var time2 = Date.now();//Tiempo final end point
+    var totalTime = time2 - time1;
+    var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+      socket.write(apikey + ".sensores.conexion.time "+ String(totalTime) +"\n");
+      socket.end();
+    });
     resolve(examples[Object.keys(examples)[0]]);
+     
   });
 }
 
