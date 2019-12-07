@@ -13,14 +13,14 @@ exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();//Tiempo inicio end point
     var error = Math.random() * (10 - 1) + 1;
-    if(true){//20% seran errores500
+    if(error <= 2){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
           socket.write(apikey + ".sensores.conexion.error500 1\n");
           socket.end();
         });
     }else{
      error = Math.random() * (10 - 1) + 1;
-     if(error <= 9){ //Si no es error 500, el 15% seran errores 404
+     if(error <= 1.5){ //Si no es error 500, el 15% seran errores 404
           var socket1 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
             socket1.write(apikey + ".sensores.conexion.error404 1\n");
             socket1.end();
