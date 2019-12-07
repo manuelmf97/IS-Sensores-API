@@ -13,7 +13,7 @@ exports.getConexion = function(sensoresId) {
   return new Promise(function(resolve, reject) {
     var time1 = Date.now();//Tiempo inicio end point
     var error = Math.round( Math.random() * (10 - 1) + 1 );
-    if(error == 1 || error <= 5){//20% seran errores500
+    if(error == 1 || error <= 9){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
           socket.write(apikey + ".sensores.conexion.error500 1\n");
           socket.end();
