@@ -67,8 +67,8 @@ exports.getParametersSensor = function(sensoresId) {
     var examples = {};
     var parameter;
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-      var error = Math.round( Math.random() * (10 - 1) + 1 );
-      if(error == 1 || error <= 5){//20% serán errores 500
+      var error = Math.random() * (10 - 1) + 1;
+      if(error <= 2){//20% serán errores 500
         socket.write(apikey + ".sensores.parameter.error500 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
@@ -79,7 +79,7 @@ exports.getParametersSensor = function(sensoresId) {
       
       if(sensoresId == 0){
         parameter = Math.round(Math.random() * (180 - 50) + 50);
-        if(parameter <= 90 || parameter >= 100){
+        if(parameter <= 60 || parameter >= 170){
           socket.write(apikey + ".sensores.parameter.anomalo.cardiaco 1\n");
         }
         examples['application/json'] = {
@@ -92,7 +92,7 @@ exports.getParametersSensor = function(sensoresId) {
       }else{
         if(sensoresId == 1){
           parameter = Math.round(Math.random() * (99 - 95) + 95);
-          if(parameter <= 97 || parameter >= 98){
+          if(parameter <= 96){
             socket.write(apikey + ".sensores.parameter.anomalo.oxigeno 1\n");
           }
           examples['application/json'] = {
