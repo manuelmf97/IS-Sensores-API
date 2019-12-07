@@ -1,6 +1,6 @@
 'use strict';
 const net    = require('net');
-const apikey = "1d7466f3-9a6b-49a4-91ed-beea68bf9126";
+const apikey = "edff5a27-c65f-443e-8e69-88ff29994b57";
 
 /**
  * Conocer conexion de un sensor identificado por ID
