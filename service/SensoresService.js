@@ -15,7 +15,7 @@ exports.getConexion = function(sensoresId) {
     var error = Math.random() * (10 - 1) + 1;
     if(true){//20% seran errores500
         var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-          socket.write(apikey + ".sensores.conexion.prueba1 1\n");
+          socket.write(apikey + ".sensores.conexion.error500 1\n");
           socket.end();
         });
     }else{
@@ -42,9 +42,9 @@ exports.getConexion = function(sensoresId) {
       };
     var time2 = Date.now();//Tiempo final end point
     var totalTime = time2 - time1;
-    var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-      socket.write(apikey + ".sensores.conexion.time "+ String(totalTime) +"\n");
-      socket.end();
+    var socket2 = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
+      socket2.write(apikey + ".sensores.conexion.time "+ String(totalTime) +"\n");
+      socket2.end();
     });
     resolve(examples[Object.keys(examples)[0]]);
      
