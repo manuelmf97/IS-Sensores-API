@@ -72,7 +72,7 @@ exports.getParametersSensor = function(sensoresId) {
         socket.write(apikey + ".sensores.parameter.error500 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 9){//Si no es error 500, el 15% serán errores 404
+        if(error <= 1.5){//Si no es error 500, el 15% serán errores 404
           socket.write(apikey + ".sensores.parameter.error404 1\n");
         }
       }
@@ -163,12 +163,12 @@ exports.getUbicacion = function(sensoresId) {
     };
 
     var socket = net.createConnection(2003, "carbon.hostedgraphite.com", function() {
-      var error = Math.round( Math.random() * (10 - 1) + 1 );
-      if(error == 1 || error <= 5){//20% serán errores 500
+      var error = Math.random() * (10 - 1) + 1;
+      if(error <= 2){//20% serán errores 500
         socket.write(apikey + ".sensores.ubicacion.error500 1\n");
       }else{
         error = Math.random() * (10 - 1) + 1;
-        if(error <= 9){//Si no es error 500,el 15% serán errores 404
+        if(error <= 1.5){//Si no es error 500,el 15% serán errores 404
           socket.write(apikey + ".sensores.ubicacion.error404 1\n");
         }
       }
